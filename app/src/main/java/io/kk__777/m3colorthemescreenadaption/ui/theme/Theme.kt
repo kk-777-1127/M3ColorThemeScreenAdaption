@@ -3,6 +3,7 @@ package io.kk__777.m3colorthemescreenadaption.ui.theme
 import android.app.Activity
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.dynamicDarkColorScheme
@@ -41,7 +42,9 @@ private val LightColorScheme = lightColorScheme(
 fun M3ColorThemeScreenAdaptionTheme(
     darkTheme: Boolean = isSystemInDarkTheme(),
     // Dynamic color is available on Android 12+
-    dynamicColor: Boolean = true,
+    dynamicColor: Boolean = false,
+    lightColorScheme: ColorScheme = LightColorScheme,
+    darkColorScheme:  ColorScheme = DarkColorScheme,
     content: @Composable () -> Unit
 ) {
     val colorScheme = when {
@@ -50,8 +53,8 @@ fun M3ColorThemeScreenAdaptionTheme(
             if (darkTheme) dynamicDarkColorScheme(context) else dynamicLightColorScheme(context)
         }
 
-        darkTheme -> DarkColorScheme
-        else -> LightColorScheme
+        darkTheme -> darkColorScheme
+        else -> lightColorScheme
     }
     val view = LocalView.current
     if (!view.isInEditMode) {
