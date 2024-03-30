@@ -1,16 +1,17 @@
 package io.kk__777.m3colorthemescreenadaption.test
+import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.ui.graphics.Color
+import dynamiccolor.DynamicScheme
+import dynamiccolor.MaterialDynamicColors
 
 /*
 作るものをコメントしていく
 clientにこのアノテーションを実装してもらう
-file@StaticColorSourceTheme(name = "hoge",color = "rgb?hex?", fullyQualifiedTheneName = "Fully Qualified fun Name for App Theme")
-file@StaticUriSourceTheme(name = "hoge",uri = "uri",  fullyQualifiedTheneName =...)
-file@StaticFileSourceTheme(name = "hoge", path = "path", fullyQualifiedTheneName =...)
-
-file@DynamicSourceTheme(name = "",  fullyQualifiedTheneName =...)
+file@StaticSeedColorTheme(name = "hoge",color = Color(Int, Long?), fullyQualifiedClientThemeFunName = "Fully Qualified fun Name for App Theme")
+file@StaticUriSourceTheme(name = "hoge",uri = "uri",  fullyQualifiedClientThemeFunName =...)
+file@DynamicSourceTheme(name = "",  fullyQualifiedClientThemeFunName =...)
 ↓
 colorSheme生成
 HogeTheme生成
@@ -24,8 +25,7 @@ HogeTheme {}
 val blueSeed = Color(0xFF00008B)
 
 /*
-https://github.com/material-foundation/material-color-utilities/blob/main/make_schemes.md
-gradleで公開されているわけではないが jarかなんかでこれを入れて 下の色を全部作る
+ここはつくらんくてもよい
  */
 val md_theme_light_blue_primary = Color(0xFF4951C3)
 val md_theme_light_blue_onPrimary = Color(0xFFFFFFFF)
@@ -89,9 +89,59 @@ val md_theme_dark_blue_surfaceTint = Color(0xFFBFC2FF)
 val md_theme_dark_blue_outlineVariant = Color(0xFF46464F)
 val md_theme_dark_blue_scrim = Color(0xFF000000)
 
+/*
+変換色々
+colorはclientからもらう
+val rgb = ColorUtils.argbFromRgb(color.red.toInt(), color.green.toInt(), color.blue.toInt())
+val hct = Hct.fromInt(rgb)
+SchemeTonalSpot(hct, false, 0.0)
+↓の関数に突っ込んで darkとlight を両方作る
+ */
+
+fun createScheme(dynamicScheme: DynamicScheme): ColorScheme {
+    val materialDynamicColors = MaterialDynamicColors()
+    return ColorScheme(
+        primary = Color(materialDynamicColors.primary().getArgb(dynamicScheme)),
+        onPrimary = Color(materialDynamicColors.onPrimary().getArgb(dynamicScheme)),
+        primaryContainer = Color(materialDynamicColors.primaryContainer().getArgb(dynamicScheme)),
+        onPrimaryContainer = Color(materialDynamicColors.onPrimaryContainer().getArgb(dynamicScheme)),
+        inversePrimary = Color(materialDynamicColors.inversePrimary().getArgb(dynamicScheme)),
+        secondary = Color(materialDynamicColors.secondary().getArgb(dynamicScheme)),
+        onSecondary = Color(materialDynamicColors.onSecondary().getArgb(dynamicScheme)),
+        secondaryContainer = Color(materialDynamicColors.secondaryContainer().getArgb(dynamicScheme)),
+        onSecondaryContainer = Color(materialDynamicColors.onSecondaryContainer().getArgb(dynamicScheme)),
+        tertiary = Color(materialDynamicColors.tertiary().getArgb(dynamicScheme)),
+        onTertiary = Color(materialDynamicColors.onTertiary().getArgb(dynamicScheme)),
+        tertiaryContainer = Color(materialDynamicColors.tertiaryContainer().getArgb(dynamicScheme)),
+        onTertiaryContainer = Color(materialDynamicColors.onTertiaryContainer().getArgb(dynamicScheme)),
+        background = Color(materialDynamicColors.background().getArgb(dynamicScheme)),
+        onBackground = Color(materialDynamicColors.onBackground().getArgb(dynamicScheme)),
+        surface = Color(materialDynamicColors.surface().getArgb(dynamicScheme)),
+        onSurface = Color(materialDynamicColors.onSurface().getArgb(dynamicScheme)),
+        surfaceVariant = Color(materialDynamicColors.surfaceVariant().getArgb(dynamicScheme)),
+        onSurfaceVariant = Color(materialDynamicColors.onSurfaceVariant().getArgb(dynamicScheme)),
+        surfaceTint = Color(materialDynamicColors.surfaceTint().getArgb(dynamicScheme)),
+        inverseSurface = Color(materialDynamicColors.inverseSurface().getArgb(dynamicScheme)),
+        inverseOnSurface = Color(materialDynamicColors.inverseOnSurface().getArgb(dynamicScheme)),
+        error = Color(materialDynamicColors.error().getArgb(dynamicScheme)),
+        onError = Color(materialDynamicColors.onError().getArgb(dynamicScheme)),
+        errorContainer = Color(materialDynamicColors.errorContainer().getArgb(dynamicScheme)),
+        onErrorContainer = Color(materialDynamicColors.onErrorContainer().getArgb(dynamicScheme)),
+        outline = Color(materialDynamicColors.outline().getArgb(dynamicScheme)),
+        outlineVariant = Color(materialDynamicColors.outlineVariant().getArgb(dynamicScheme)),
+        scrim = Color(materialDynamicColors.scrim().getArgb(dynamicScheme))
+    )
+}
 
 /*
-次にこれを作る KSP で行ける
+ここまでで、ライト ダークの colorSchemeはできているから
+
+val BlueLightColors = lightColorScheme( <- これはベタでKMP作成
+primary =  <- ここが必要
+
+Color() <- はベタ
+中身は 0xFF1B1B1F みたいな文字列が取れれば勝ち
+colorScheme.primary.toArg() の Int　取得値をいれればよさそう
  */
 val BlueLightColors = lightColorScheme(
     primary = md_theme_light_blue_primary,
@@ -157,7 +207,3 @@ val BlueDarkColors = darkColorScheme(
     outlineVariant = md_theme_dark_blue_outlineVariant,
     scrim = md_theme_dark_blue_scrim,
 )
-
-/*
-io.kk__777.m3colorthemescreenadaption.ui.theme.M3ColorThemeScreenAdaptionTheme
- */

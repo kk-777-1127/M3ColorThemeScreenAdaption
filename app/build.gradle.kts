@@ -3,6 +3,7 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid)
 }
 
+// TODO migrate build-logic
 android {
     namespace = "io.kk__777.m3colorthemescreenadaption"
     compileSdk = 34
@@ -50,6 +51,7 @@ android {
 }
 
 dependencies {
+    implementation(project(":submodule-utility"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

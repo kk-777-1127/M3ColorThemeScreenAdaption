@@ -9,6 +9,10 @@ lifecycleRuntimeKtx = "2.7.0"
 activityCompose = "1.8.2"
 composeBom = "2023.08.00"
 navigation-compose =  "2.7.7"
+appcompat = "1.6.1"
+material = "1.10.0"
+error-phone-gradle-plugin = "3.1.0"
+error-phone = "2.26.1"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -26,9 +30,14 @@ androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-man
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" , version = "1.3.0-alpha03"}
 androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigation-compose"}
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+error-phone = { module = "com.google.errorprone:error_prone_core", version.ref = "error-phone"}
 
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+androidLibrary = { id = "com.android.library", version.ref = "agp" }
+error-phone = { id = "net.ltgt.errorprone", version.ref = "error-phone-gradle-plugin"}
 

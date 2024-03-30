@@ -1,0 +1,3 @@
+[submodule "submodule-utility/submodule"]
+	path = submodule-utility/submodule
+	url = git@github.com:kk-777-1127/material-color-utilities.git
