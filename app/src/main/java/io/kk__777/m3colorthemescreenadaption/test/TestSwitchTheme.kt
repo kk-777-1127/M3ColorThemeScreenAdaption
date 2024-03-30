@@ -1,13 +1,10 @@
 package io.kk__777.m3colorthemescreenadaption.test
 
-import android.graphics.ColorSpace.Rgb
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
@@ -21,7 +18,6 @@ import androidx.compose.material3.AssistChip
 import androidx.compose.material3.AssistChipDefaults
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
-import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.ElevatedAssistChip
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilledTonalButton
@@ -51,19 +47,14 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import dynamiccolor.DynamicScheme
-import dynamiccolor.MaterialDynamicColors
-import hct.Hct
+import io.kk__777.colors.ColorSchemeGenerator
 import io.kk__777.m3colorthemescreenadaption.ui.theme.M3ColorThemeScreenAdaptionTheme
-import scheme.SchemeTonalSpot
-import utils.ColorUtils
 import java.util.Locale
 
 
@@ -83,12 +74,10 @@ enum class NavigationRoots(val root: String) {
     Root("root") {
         @Composable
         override fun Content(screenNavController: NavController) {
-            val color = Color(0xff690035)
-            val rgb = ColorUtils.argbFromRgb(color.red.toInt(), color.green.toInt(), color.blue.toInt())
-            val hct = Hct.fromInt(rgb)
+            val schemes = ColorSchemeGenerator.create().generateColorSchemes(Color(0xff690035))
             M3ColorThemeScreenAdaptionTheme(
-                lightColorScheme = createScheme(SchemeTonalSpot(hct, false, 0.0)),
-                darkColorScheme = createScheme(SchemeTonalSpot(hct, true, 0.0))
+                lightColorScheme = schemes.lightColorScheme,
+                darkColorScheme = schemes.darkColorScheme
             ) {
                 Greeting(route = this, screenNavController = screenNavController)
             }
@@ -175,17 +164,6 @@ fun Greeting(
                     .padding(24.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                item {
-                    val rgb = 0xff690035
-                    val hct = Hct.fromInt(rgb.toInt())
-                    val hctFromHct = Hct.from(0.0, 87.0, 21.0)
-                    val scheme = SchemeTonalSpot(hct, true, 0.0)
-                    val materialDynamicColors = MaterialDynamicColors()
-                    Column {
-                        Text(text = materialDynamicColors.primary().getArgb(scheme).toString(),)
-                        Box(modifier = Modifier.fillMaxWidth().height(24.dp).background(color = Color(materialDynamicColors.primary().getArgb(scheme))))
-                    }
-                }
                 item {
                     Box(modifier = Modifier.fillMaxWidth()) {
                         IconButton(

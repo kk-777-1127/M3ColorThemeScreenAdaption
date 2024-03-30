@@ -1,10 +1,7 @@
 package io.kk__777.m3colorthemescreenadaption.test
-import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.ui.graphics.Color
-import dynamiccolor.DynamicScheme
-import dynamiccolor.MaterialDynamicColors
 
 /*
 作るものをコメントしていく
@@ -98,40 +95,40 @@ SchemeTonalSpot(hct, false, 0.0)
 ↓の関数に突っ込んで darkとlight を両方作る
  */
 
-fun createScheme(dynamicScheme: DynamicScheme): ColorScheme {
-    val materialDynamicColors = MaterialDynamicColors()
-    return ColorScheme(
-        primary = Color(materialDynamicColors.primary().getArgb(dynamicScheme)),
-        onPrimary = Color(materialDynamicColors.onPrimary().getArgb(dynamicScheme)),
-        primaryContainer = Color(materialDynamicColors.primaryContainer().getArgb(dynamicScheme)),
-        onPrimaryContainer = Color(materialDynamicColors.onPrimaryContainer().getArgb(dynamicScheme)),
-        inversePrimary = Color(materialDynamicColors.inversePrimary().getArgb(dynamicScheme)),
-        secondary = Color(materialDynamicColors.secondary().getArgb(dynamicScheme)),
-        onSecondary = Color(materialDynamicColors.onSecondary().getArgb(dynamicScheme)),
-        secondaryContainer = Color(materialDynamicColors.secondaryContainer().getArgb(dynamicScheme)),
-        onSecondaryContainer = Color(materialDynamicColors.onSecondaryContainer().getArgb(dynamicScheme)),
-        tertiary = Color(materialDynamicColors.tertiary().getArgb(dynamicScheme)),
-        onTertiary = Color(materialDynamicColors.onTertiary().getArgb(dynamicScheme)),
-        tertiaryContainer = Color(materialDynamicColors.tertiaryContainer().getArgb(dynamicScheme)),
-        onTertiaryContainer = Color(materialDynamicColors.onTertiaryContainer().getArgb(dynamicScheme)),
-        background = Color(materialDynamicColors.background().getArgb(dynamicScheme)),
-        onBackground = Color(materialDynamicColors.onBackground().getArgb(dynamicScheme)),
-        surface = Color(materialDynamicColors.surface().getArgb(dynamicScheme)),
-        onSurface = Color(materialDynamicColors.onSurface().getArgb(dynamicScheme)),
-        surfaceVariant = Color(materialDynamicColors.surfaceVariant().getArgb(dynamicScheme)),
-        onSurfaceVariant = Color(materialDynamicColors.onSurfaceVariant().getArgb(dynamicScheme)),
-        surfaceTint = Color(materialDynamicColors.surfaceTint().getArgb(dynamicScheme)),
-        inverseSurface = Color(materialDynamicColors.inverseSurface().getArgb(dynamicScheme)),
-        inverseOnSurface = Color(materialDynamicColors.inverseOnSurface().getArgb(dynamicScheme)),
-        error = Color(materialDynamicColors.error().getArgb(dynamicScheme)),
-        onError = Color(materialDynamicColors.onError().getArgb(dynamicScheme)),
-        errorContainer = Color(materialDynamicColors.errorContainer().getArgb(dynamicScheme)),
-        onErrorContainer = Color(materialDynamicColors.onErrorContainer().getArgb(dynamicScheme)),
-        outline = Color(materialDynamicColors.outline().getArgb(dynamicScheme)),
-        outlineVariant = Color(materialDynamicColors.outlineVariant().getArgb(dynamicScheme)),
-        scrim = Color(materialDynamicColors.scrim().getArgb(dynamicScheme))
-    )
-}
+//fun createScheme(dynamicScheme: DynamicScheme): ColorScheme {
+//    val materialDynamicColors = MaterialDynamicColors()
+//    return ColorScheme(
+//        primary = Color(materialDynamicColors.primary().getArgb(dynamicScheme)),
+//        onPrimary = Color(materialDynamicColors.onPrimary().getArgb(dynamicScheme)),
+//        primaryContainer = Color(materialDynamicColors.primaryContainer().getArgb(dynamicScheme)),
+//        onPrimaryContainer = Color(materialDynamicColors.onPrimaryContainer().getArgb(dynamicScheme)),
+//        inversePrimary = Color(materialDynamicColors.inversePrimary().getArgb(dynamicScheme)),
+//        secondary = Color(materialDynamicColors.secondary().getArgb(dynamicScheme)),
+//        onSecondary = Color(materialDynamicColors.onSecondary().getArgb(dynamicScheme)),
+//        secondaryContainer = Color(materialDynamicColors.secondaryContainer().getArgb(dynamicScheme)),
+//        onSecondaryContainer = Color(materialDynamicColors.onSecondaryContainer().getArgb(dynamicScheme)),
+//        tertiary = Color(materialDynamicColors.tertiary().getArgb(dynamicScheme)),
+//        onTertiary = Color(materialDynamicColors.onTertiary().getArgb(dynamicScheme)),
+//        tertiaryContainer = Color(materialDynamicColors.tertiaryContainer().getArgb(dynamicScheme)),
+//        onTertiaryContainer = Color(materialDynamicColors.onTertiaryContainer().getArgb(dynamicScheme)),
+//        background = Color(materialDynamicColors.background().getArgb(dynamicScheme)),
+//        onBackground = Color(materialDynamicColors.onBackground().getArgb(dynamicScheme)),
+//        surface = Color(materialDynamicColors.surface().getArgb(dynamicScheme)),
+//        onSurface = Color(materialDynamicColors.onSurface().getArgb(dynamicScheme)),
+//        surfaceVariant = Color(materialDynamicColors.surfaceVariant().getArgb(dynamicScheme)),
+//        onSurfaceVariant = Color(materialDynamicColors.onSurfaceVariant().getArgb(dynamicScheme)),
+//        surfaceTint = Color(materialDynamicColors.surfaceTint().getArgb(dynamicScheme)),
+//        inverseSurface = Color(materialDynamicColors.inverseSurface().getArgb(dynamicScheme)),
+//        inverseOnSurface = Color(materialDynamicColors.inverseOnSurface().getArgb(dynamicScheme)),
+//        error = Color(materialDynamicColors.error().getArgb(dynamicScheme)),
+//        onError = Color(materialDynamicColors.onError().getArgb(dynamicScheme)),
+//        errorContainer = Color(materialDynamicColors.errorContainer().getArgb(dynamicScheme)),
+//        onErrorContainer = Color(materialDynamicColors.onErrorContainer().getArgb(dynamicScheme)),
+//        outline = Color(materialDynamicColors.outline().getArgb(dynamicScheme)),
+//        outlineVariant = Color(materialDynamicColors.outlineVariant().getArgb(dynamicScheme)),
+//        scrim = Color(materialDynamicColors.scrim().getArgb(dynamicScheme))
+//    )
+//}
 
 /*
 ここまでで、ライト ダークの colorSchemeはできているから
