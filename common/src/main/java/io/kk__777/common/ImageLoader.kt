@@ -5,11 +5,11 @@ import io.ktor.client.call.body
 import io.ktor.client.engine.cio.CIO
 import io.ktor.client.engine.cio.endpoint
 import io.ktor.client.request.get
-import io.ktor.http.append
 import io.ktor.http.headers
 import kotlinx.coroutines.runBlocking
 import java.net.URI
 
+// Not Implemented
 interface ImageLoader {
     fun downloadImage(uri: URI): Result<ByteArray>
 
@@ -17,7 +17,7 @@ interface ImageLoader {
         fun create(
             // TODO Make it possible to custom httpClient from client.
 //            httpClient: HttpClient? = null
-            headerMap: Map<String, String> = emptyMap()/*mapOf("Authorization" to "Client-ID CFsC_KJzVclTMw3G2SmI3aRZ5rKBLbCrHzfi2_XX6Cg") */
+            headerMap: Map<String, String> = emptyMap()
         ): ImageLoader {
             val httpClient: HttpClient? = null
             val client = httpClient ?: HttpClient(CIO) {

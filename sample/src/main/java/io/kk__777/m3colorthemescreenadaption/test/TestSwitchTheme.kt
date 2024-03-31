@@ -20,6 +20,7 @@ import androidx.compose.material3.AssistChip
 import androidx.compose.material3.AssistChipDefaults
 import androidx.compose.material3.Button
 import androidx.compose.material3.Card
+import androidx.compose.material3.ColorScheme
 import androidx.compose.material3.ElevatedAssistChip
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FilledTonalButton
@@ -48,6 +49,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
@@ -55,12 +57,15 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import io.kk__777.common.ColorSchemeGenerator
+import io.kk__777.common.ColorSchemes
 import io.kk__777.m3colorthemescreenadaption.ui.theme.M3ColorThemeScreenAdaptionTheme
 import io.kk__777.common.ImageLoader
+import io.kk__777.common.RawColorScheme
+import io.kk__777.library.StaticColorSourceTheme
 import java.net.URI
 import java.util.Locale
 
-
+const val samplePinkSeed = 0xFFFF1493
 @Composable
 fun TestSwitchColorThemes() {
     M3ColorThemeScreenAdaptionTheme {
@@ -77,9 +82,10 @@ enum class NavigationRoots(val root: String) {
     Root("root") {
         @Composable
         override fun Content(screenNavController: NavController) {
+            val scheme = ColorSchemeGenerator.create().generateColorSchemes(0xFFFFFF00)
             M3ColorThemeScreenAdaptionTheme(
-//                lightColorScheme = schemes.lightColorScheme,
-//                darkColorScheme = schemes.darkColorScheme
+                lightColorScheme = scheme.lightColorScheme.createScheme(),
+                darkColorScheme = scheme.darkColorScheme.createScheme()
             ) {
                 Greeting(route = this, screenNavController = screenNavController)
             }
@@ -124,6 +130,10 @@ enum class NavigationRoots(val root: String) {
 
 }
 
+@StaticColorSourceTheme(
+    color = samplePinkSeed,
+    fullyQualifiedTheme = "io.kk__777.m3colorthemescreenadaption.ui.theme.M3ColorThemeScreenAdaptionTheme"
+)
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Greeting(
@@ -166,49 +176,6 @@ fun Greeting(
                     .padding(24.dp),
                 verticalArrangement = Arrangement.spacedBy(12.dp)
             ) {
-                item {
-                    val imageLoader = io.kk__777.common.ImageLoader.create()
-                    Column {
-                        val uri = URI("https://images.unsplash.com/photo-1708469195559-95f4fc02508d?crop=entropy&cs=srgb&fm=jpg&ixid=M3wxODkwNTV8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MTE4NDYxMDJ8&ixlib=rb-4.0.3&q=85")
-                        val uri2 = URI("https://images.unsplash.com/photo-1707870771435-50d769227de9?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3wxODkwNTV8MHwxfHJhbmRvbXx8fHx8fHx8fDE3MTE4NDY0MjV8&ixlib=rb-4.0.3&q=80&w=400")
-                        val image = imageLoader.downloadImage(uri)
-                        val image2 = imageLoader.downloadImage(uri2)
-                        Text(text = "$image")
-                        Text(text = "$image2")
-                        val generator = io.kk__777.common.ColorSchemeGenerator.create()
-                        runCatching {
-                            val color1 = generator.generateColorSchemes(image.getOrThrow())
-                            val color2 = generator.generateColorSchemes(image2.getOrThrow())
-                            Box(modifier = Modifier
-                                .fillMaxWidth()
-                                .height(24.dp)
-                                .background(color1.lightColorScheme.primary))
-                            Box(modifier = Modifier
-                                .fillMaxWidth()
-                                .height(24.dp)
-                                .background(color1.lightColorScheme.onPrimary))
-                            Box(modifier = Modifier
-                                .fillMaxWidth()
-                                .height(24.dp)
-                                .background(color1.lightColorScheme.secondary))
-                            Box(modifier = Modifier
-                                .fillMaxWidth()
-                                .height(24.dp)
-                                .background(color2.lightColorScheme.primary))
-                            Box(modifier = Modifier
-                                .fillMaxWidth()
-                                .height(24.dp)
-                                .background(color2.lightColorScheme.secondary))
-                            Box(modifier = Modifier
-                                .fillMaxWidth()
-                                .height(24.dp)
-                                .background(color2.lightColorScheme.tertiary))
-                        }.onFailure { 
-                            Text(text = "失敗")
-                        }
-                    }
-
-                }
                 item {
                     Box(modifier = Modifier.fillMaxWidth()) {
                         IconButton(
@@ -366,4 +333,38 @@ fun Greeting(
             }
         }
     }
+}
+
+fun RawColorScheme.createScheme(): ColorScheme {
+    return ColorScheme(
+        primary = Color(this.primary),
+        onPrimary = Color(this.onPrimary),
+        primaryContainer = Color(this.primaryContainer),
+        onPrimaryContainer = Color(this.onPrimaryContainer),
+        inversePrimary = Color(this.inversePrimary),
+        secondary = Color(this.secondary),
+        onSecondary = Color(this.onSecondary),
+        secondaryContainer = Color(this.secondaryContainer),
+        onSecondaryContainer = Color(this.onSecondaryContainer),
+        tertiary = Color(this.tertiary),
+        onTertiary = Color(this.onTertiary),
+        tertiaryContainer = Color(this.tertiaryContainer),
+        onTertiaryContainer = Color(this.onTertiaryContainer),
+        background = Color(this.background),
+        onBackground = Color(this.onBackground),
+        surface = Color(this.surface),
+        onSurface = Color(this.onSurface),
+        surfaceVariant = Color(this.surfaceVariant),
+        onSurfaceVariant = Color(this.onSurfaceVariant),
+        surfaceTint = Color(this.surfaceTint),
+        inverseSurface = Color(this.inverseSurface),
+        inverseOnSurface = Color(this.inverseOnSurface),
+        error = Color(this.error),
+        onError = Color(this.onError),
+        errorContainer = Color(this.errorContainer),
+        onErrorContainer = Color(this.onErrorContainer),
+        outline = Color(this.outline),
+        outlineVariant = Color(this.outlineVariant),
+        scrim = Color(this.scrim)
+    )
 }
