@@ -35,6 +35,7 @@ class M3ColorSymbolProcessor(
     private val logger: KSPLogger,
     private val codeGenerator: CodeGenerator,
 ): SymbolProcessor {
+
     override fun process(resolver: Resolver): List<KSAnnotated> {
         resolver.getSymbolsWithAnnotation("io.kk__777.library.StaticColorSourceTheme")
             .filterIsInstance<KSFunctionDeclaration>()
@@ -45,26 +46,12 @@ class M3ColorSymbolProcessor(
                             it.annotationType.resolve().declaration.qualifiedName?.asString() == "io.kk__777.library.StaticColorSourceTheme"
                 }
                 val color = annotation.arguments.find { it.name?.asString() == "rgbColor" }?.value as Long
-                val name = annotation.arguments.find { it.name?.asString() == "name" }?.value as String
-                val fileName = name.ifEmpty { "${functionName}_ColorTheme_Class" }
+                val name = (annotation.arguments.find { it.name?.asString() == "name" }?.value as String).let {
+                    it.ifEmpty { functionName }
+                }
+                val uniqueFileName = "${name}_${functionName}_Theme"
                 val packageName = function.containingFile?.packageName?.asString() ?: "defaultPackage"
-
-                val fileSpecBuilder = FileSpec.builder(packageName, fileName)
-                    .addType(
-                        TypeSpec.objectBuilder(fileName)
-                            .addProperty(
-                                PropertySpec.builder("color", Long::class, KModifier.CONST)
-                                    .initializer("%L", color)
-                                    .build()
-                            )
-                            .addProperty(
-                                PropertySpec.builder("name", String::class, KModifier.CONST)
-                                    .initializer("%S", name)
-                                    .build()
-                            )
-
-                            .build()
-                    )
+                val fileSpecBuilder = FileSpec.builder(packageName, uniqueFileName)
                     .addFunction(
                         generateM3ColorThemeFunction(functionName = "${name}M3ColorTheme", color)
                     )

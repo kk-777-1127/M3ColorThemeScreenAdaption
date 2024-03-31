@@ -52,7 +52,6 @@ android {
 }
 
 dependencies {
-    implementation(project(":common"))
     implementation(project(":library"))
     ksp(project(":compiler"))
     implementation(libs.androidx.core.ktx)
