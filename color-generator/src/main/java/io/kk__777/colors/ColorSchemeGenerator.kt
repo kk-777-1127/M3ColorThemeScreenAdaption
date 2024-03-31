@@ -1,12 +1,17 @@
 package io.kk__777.colors
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import androidx.compose.material3.ColorScheme
 import androidx.compose.ui.graphics.Color
 import dynamiccolor.DynamicScheme
 import dynamiccolor.MaterialDynamicColors
 import hct.Hct
+import quantize.QuantizerCelebi
 import scheme.SchemeTonalSpot
+import score.Score
 import utils.ColorUtils
+import java.lang.IllegalStateException
 
 typealias LightColorScheme = ColorScheme
 typealias DarkColorScheme = ColorScheme
@@ -18,16 +23,31 @@ data class ColorSchemes(
 interface ColorSchemeGenerator {
     fun generateColorSchemes(color: Color): ColorSchemes
 
+    fun generateColorSchemes(imageArray: ByteArray): ColorSchemes
+
     companion object {
         // TODO DI Framework
-        fun create():ColorSchemeGenerator = ColorSchemeGeneratorImpl()
+        fun create():ColorSchemeGenerator = ColorSchemeGeneratorImpl(BitmapCoordinatorForMCU())
     }
 }
 
-internal class ColorSchemeGeneratorImpl: ColorSchemeGenerator {
+internal class ColorSchemeGeneratorImpl(
+    private val bitmapCoordinator: BitmapCoordinatorForMCU
+): ColorSchemeGenerator {
     override fun generateColorSchemes(color: Color): ColorSchemes {
         val rgb = ColorUtils.argbFromRgb(color.red.toInt(), color.green.toInt(), color.blue.toInt())
         val hct = Hct.fromInt(rgb)
+        return ColorSchemes(
+            lightColorScheme = SchemeTonalSpot(hct, false, 0.0).createScheme(),
+            darkColorScheme = SchemeTonalSpot(hct, true, 0.0).createScheme()
+        )
+    }
+
+    override fun generateColorSchemes(imageArray: ByteArray): ColorSchemes {
+        val pixels = bitmapCoordinator.getPixelsFromImage(imageArray)
+        val seedColor = Score.score(QuantizerCelebi.quantize(pixels, 128))
+            .firstOrNull() ?: throw IllegalStateException("Can not create seed color from image")
+        val hct = Hct.fromInt(seedColor)
         return ColorSchemes(
             lightColorScheme = SchemeTonalSpot(hct, false, 0.0).createScheme(),
             darkColorScheme = SchemeTonalSpot(hct, true, 0.0).createScheme()
@@ -68,5 +88,25 @@ internal class ColorSchemeGeneratorImpl: ColorSchemeGenerator {
             scrim = Color(materialDynamicColors.scrim().getArgb(this))
         )
     }
+}
 
+internal class BitmapCoordinatorForMCU {
+
+    /**
+     * 与えられた画像データから128x128ピクセルのピクセル配列を生成する。
+     *
+     * @param imageArray 画像データを表すByteArray。
+     * @return ARGB形式のピクセルデータを含むIntArray。
+     */
+    fun getPixelsFromImage(imageArray: ByteArray): IntArray {
+        val bitmap = BitmapFactory.decodeByteArray(imageArray, 0, imageArray.size)
+
+        // 画像を128x128ピクセルにリサイズ
+        val resizedBitmap = Bitmap.createScaledBitmap(bitmap, 128, 128, true)
+
+        // リサイズされたBitmapからピクセル配列を取得
+        return IntArray(128 * 128).apply {
+            resizedBitmap.getPixels(this, 0, 128, 0, 0, 128, 128)
+        }
+    }
 }

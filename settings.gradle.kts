@@ -22,4 +22,5 @@ dependencyResolutionManagement {
 rootProject.name = "M3ColorThemeScreenAdaption"
 include(":app")
 include(":submodule-utility")
-include(":colors")
+include(":color-generator")
+include(":remotesource")

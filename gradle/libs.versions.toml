@@ -13,6 +13,7 @@ appcompat = "1.6.1"
 material = "1.10.0"
 error-phone-gradle-plugin = "3.1.0"
 error-phone = "2.26.1"
+ktor = "2.3.9"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -33,7 +34,10 @@ androidx-navigation-compose = { module = "androidx.navigation:navigation-compose
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 error-phone = { module = "com.google.errorprone:error_prone_core", version.ref = "error-phone"}
-
+ktor-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+ktor-engine-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
+# TODO: Cant use in KMP, would like to use other mock library instead.
+mockk = { module = "io.mockk:mockk", version = "1.13.10"}
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

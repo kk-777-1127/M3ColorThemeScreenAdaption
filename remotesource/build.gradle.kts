@@ -3,9 +3,8 @@ plugins {
     alias(libs.plugins.jetbrainsKotlinAndroid)
 }
 
-// TODO Migrate build-logic
 android {
-    namespace = "io.kk__777.colors"
+    namespace = "io.kk__777.remotesource"
     compileSdk = 34
 
     defaultConfig {
@@ -34,13 +33,8 @@ android {
 }
 
 dependencies {
-    implementation(project(":submodule-utility"))
-    implementation(libs.androidx.core.ktx)
-    implementation(libs.androidx.appcompat)
-    implementation(libs.androidx.ui.graphics)
-    implementation(libs.androidx.activity.compose)
-    implementation(libs.androidx.material3)
-    implementation(libs.material)
+    implementation(libs.ktor.core)
+    implementation(libs.ktor.engine.cio)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
