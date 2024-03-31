@@ -41,7 +41,8 @@ ktor-engine-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
 # TODO: Cant use in KMP, would like to use other mock library instead.
 mockk = { module = "io.mockk:mockk", version = "1.13.10"}
 ksp = { module = "com.google.devtools.ksp:symbol-processing-api", version.ref = "ksp"}
-kotlin-poet = { module = "com.squareup:kotlinpoet-ksp", version.ref = "kotlin-poet"}
+kotlin-poet-ksp = { module = "com.squareup:kotlinpoet-ksp", version.ref = "kotlin-poet"}
+kotlin-poet = { module = "com.squareup:kotlinpoet", version.ref = "kotlin-poet"}
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }
