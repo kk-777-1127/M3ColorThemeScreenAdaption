@@ -1,2 +1,27 @@
-# M3ColorThemeScreenAdaption
-M3ColorThemeScreenAdaption is an innovative library designed to dynamically adapt your application's Material Design 3 (M3) color themes across different screens.
+# M3ColorThemeScreen
+
+Introducing a library that dynamically generates a Color Palette and Theme for your Android app from a single seed color
+
+## Example
+```kotlin
+private const val blueSeed = 0xFF00008B
+
+@StaticColorSourceTheme( // Add annotation for generating color palette and theme at build time.
+    name = "SampleScreenTheme",
+    rgbColor = blueSeed
+)
+@Composable
+fun SampleScreen1(
+    route: NavigationRoots,
+    screenNavController: NavController
+) {
+    SampleScreenThemeM3ColorTheme { // Use Generating Theme 
+        SampleContent(route, screenNavController)
+    }
+}
+```
+
+## To Do
+- Support Dynamic Theme 
+- Publish this library
+- Develop a feature to create a color palette and theme based on a seed color extracted from a loaded image URL.

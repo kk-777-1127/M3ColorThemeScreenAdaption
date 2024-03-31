@@ -7,8 +7,7 @@ import io.kk__777.library.StaticColorSourceTheme
 
 private const val blueSeed = 0xFF00008B
 
-
-@StaticColorSourceTheme( // Annotation for creating color pallet
+@StaticColorSourceTheme( // Annotation for creating color pallet via build
     name = "SampleScreenTheme",
     rgbColor = blueSeed
 )

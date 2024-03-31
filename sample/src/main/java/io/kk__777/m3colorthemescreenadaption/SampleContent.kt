@@ -473,41 +473,40 @@ fun SampleContent(
                     }
                 }
             }
-        }
-
-        if (openDialog) {
-            AlertDialog(
-                onDismissRequest = {
-                    // Dismiss the dialog when the user clicks outside the dialog or on the back
-                    // button. If you want to disable that functionality, simply use an empty
-                    // onDismissRequest.
-                    openDialog = false
-                },
-                title = {
-                    Text(text = "Title")
-                },
-                text = {
-                    Text(text = "Turned on by default")
-                },
-                confirmButton = {
-                    TextButton(
-                        onClick = {
-                            openDialog = false
+            if (openDialog) {
+                AlertDialog(
+                    onDismissRequest = {
+                        // Dismiss the dialog when the user clicks outside the dialog or on the back
+                        // button. If you want to disable that functionality, simply use an empty
+                        // onDismissRequest.
+                        openDialog = false
+                    },
+                    title = {
+                        Text(text = "Title")
+                    },
+                    text = {
+                        Text(text = "Turned on by default")
+                    },
+                    confirmButton = {
+                        TextButton(
+                            onClick = {
+                                openDialog = false
+                            }
+                        ) {
+                            Text("Confirm")
                         }
-                    ) {
-                        Text("Confirm")
-                    }
-                },
-                dismissButton = {
-                    TextButton(
-                        onClick = {
-                            openDialog = false
+                    },
+                    dismissButton = {
+                        TextButton(
+                            onClick = {
+                                openDialog = false
+                            }
+                        ) {
+                            Text("Dismiss")
                         }
-                    ) {
-                        Text("Dismiss")
                     }
-                }
-            )
+                )
+            }
         }
     }
 }
