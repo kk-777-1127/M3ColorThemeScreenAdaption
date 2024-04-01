@@ -1,20 +1,20 @@
 [versions]
 agp = "8.3.1"
-kotlin = "1.9.0"
+kotlin = "1.9.23"
 coreKtx = "1.12.0"
 junit = "4.13.2"
 junitVersion = "1.1.5"
 espressoCore = "3.5.1"
 lifecycleRuntimeKtx = "2.7.0"
 activityCompose = "1.8.2"
-composeBom = "2023.08.00"
+composeBom = "2024.03.00"
 navigation-compose =  "2.7.7"
 appcompat = "1.6.1"
 material = "1.10.0"
 error-phone-gradle-plugin = "3.1.0"
 error-phone = "2.26.1"
 ktor = "2.3.9"
-ksp = "1.9.0-1.0.13"
+ksp = "1.9.23-1.0.19"
 kotlin-poet = "1.16.0"
 
 [libraries]
