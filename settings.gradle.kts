@@ -16,10 +16,11 @@ dependencyResolutionManagement {
     repositories {
         google()
         mavenCentral()
+        maven { setUrl("https://jitpack.io") }
     }
 }
 
-rootProject.name = "M3ColorThemeScreenAdaption"
+rootProject.name = "M3ColorThemeScreen"
 include(":sample")
 include(":submodule-utility")
 include(":library")
