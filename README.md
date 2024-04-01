@@ -1,6 +1,6 @@
 # M3ColorThemeScreen
 
-Introducing a library that dynamically generates a Color Palette and Theme for your Android app from a single seed color
+This library generates M3 Theme for screen from a single seed color
 
 ## Example
 ```kotlin
