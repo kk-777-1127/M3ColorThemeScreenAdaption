@@ -16,7 +16,7 @@ fun SampleScreen1(
     route: NavigationRoots,
     screenNavController: NavController
 ) {
-    SampleScreenThemeM3ColorTheme { // Use Generating Theme 
+    SampleScreenThemeM3ColorTheme { // Use Generated Theme 
         SampleContent(route, screenNavController)
     }
 }
