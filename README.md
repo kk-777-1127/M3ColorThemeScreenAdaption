@@ -1,6 +1,7 @@
 # M3ColorThemeScreen
 
-Generate an M3 Theme for screen or screens based on a single seed color, using annotations. Utilizes [material-color-utilities](https://github.com/material-foundation/material-color-utilities) for generating color palettes.
+Generate an M3 Theme for screen or screens based on a single seed color, using annotations. 
+Utilizes [material-color-utilities](https://github.com/material-foundation/material-color-utilities) for generating color palettes.
 
 ## Usage
 ```gradle.kts
