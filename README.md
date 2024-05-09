@@ -10,8 +10,8 @@ plugin {
 }
 
 dependencies {
-    implementation("com.github.kk-777-1127.M3ColorThemeScreen:m3-color-theme-screen:0.1.1-SNAPSHOT")
-    ksp("com.github.kk-777-1127.M3ColorThemeScreen:compiler:0.1.1-SNAPSHOT")
+    implementation("com.github.kk-777-1127.M3ColorThemeScreen:m3-color-theme-screen:VERSION")
+    ksp("com.github.kk-777-1127.M3ColorThemeScreen:compiler:VERSION")
 }
 ```
 
