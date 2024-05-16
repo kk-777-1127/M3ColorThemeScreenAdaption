@@ -39,7 +39,7 @@ error-phone = { module = "com.google.errorprone:error_prone_core", version.ref =
 ktor-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
 ktor-engine-cio = { module = "io.ktor:ktor-client-cio", version.ref = "ktor" }
 # TODO: Cant use in KMP, would like to use other mock library instead.
-mockk = { module = "io.mockk:mockk", version = "1.13.10"}
+mockk = { module = "io.mockk:mockk", version = "1.13.11"}
 ksp = { module = "com.google.devtools.ksp:symbol-processing-api", version.ref = "ksp"}
 kotlin-poet-ksp = { module = "com.squareup:kotlinpoet-ksp", version.ref = "kotlin-poet"}
 kotlin-poet = { module = "com.squareup:kotlinpoet", version.ref = "kotlin-poet"}
